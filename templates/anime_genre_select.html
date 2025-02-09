@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block content %}
+  <h2>Pick an Anime Genre</h2>
+  <form action="{{ url_for('browse_anime_by_genre') }}" method="GET">
+    <label for="genre_id">Select Genre:</label>
+    <select name="genre_id" id="genre_id">
+      {% for mal_id, genre_name in anime_genres.items() %}
+        <option value="{{ mal_id }}">{{ genre_name }}</option>
+      {% endfor %}
+    </select>
+
+    <button type="submit">Browse</button>
+  </form>
+{% endblock %}

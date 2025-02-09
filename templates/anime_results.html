@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% block content %}
+  <h2>Results for "{{ query }}"</h2>
+
+  {% if results %}
+    {% for item in results %}
+      <div class="item">
+        {# For recommendations, Jikan often uses item["entry"] #}
+        {% set anime = item['entry'] if item.get('entry') else item %}
+
+        <h3>
+          {{ anime.title or "No Title" }}
+          ({{ anime.year or "N/A" }})
+        </h3>
+
+        {% if anime.images and anime.images.get('jpg') and anime.images['jpg'].get('image_url') %}
+          <img class="poster" src="{{ anime.images['jpg']['image_url'] }}" alt="Poster">
+        {% endif %}
+
+        <p>{{ anime.synopsis or "No synopsis available" }}</p>
+        <p><strong>Type:</strong> {{ anime.type or "?" }}</p>
+        <p><strong>Episodes:</strong> {{ anime.episodes or "?" }}</p>
+
+        <a href="{{ url_for('anime_recommendations', mal_id=anime.mal_id) }}">
+          View Anime Recommendations
+        </a>
+
+        {# Add to Watchlist form for Anime #}
+        <form action="{{ url_for('add_to_watchlist') }}" method="POST" style="margin-top: 8px;">
+          <input type="hidden" name="media_type" value="anime">
+          <input type="hidden" name="item_id" value="{{ anime.mal_id }}">
+          <input type="hidden" name="title" value="{{ anime.title }}">
+          {% if anime.images and anime.images.get('jpg') %}
+            <input type="hidden" name="poster_url" value="{{ anime.images['jpg']['image_url'] }}">
+          {% else %}
+            <input type="hidden" name="poster_url" value="">
+          {% endif %}
+          <button type="submit">Add to Watchlist</button>
+        </form>
+      </div>
+    {% endfor %}
+  {% else %}
+    <p>No results found.</p>
+  {% endif %}
+{% endblock %}
