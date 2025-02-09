@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block content %}
+  <h2>My Watchlist</h2>
+  {% if items %}
+    <ul>
+      {% for item in items %}
+        <li>
+          <strong>{{ item.title }}</strong> ({{ item.media_type }})
+          {% if item.poster_url %}
+            <br>
+            <img src="{{ item.poster_url }}" alt="Poster" style="max-height: 150px;">
+          {% endif %}
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>You have no watchlist items yet.</p>
+  {% endif %}
+{% endblock %}

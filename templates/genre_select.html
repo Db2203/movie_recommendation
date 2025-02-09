@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block content %}
+  <h2>Pick a Movie/TV Genre</h2>
+  <form action="{{ url_for('browse_by_genre') }}" method="GET">
+    <label for="media_type">Select Media Type:</label>
+    <select name="media_type" id="media_type">
+      <option value="movie">Movie</option>
+      <option value="tv">TV</option>
+    </select>
+
+    <label for="genre_id">Select Genre:</label>
+    <select name="genre_id" id="genre_id">
+      <optgroup label="Movie Genres">
+        {% for gen_id, gen_name in movie_genres.items() %}
+          <option value="{{ gen_id }}">{{ gen_name }}</option>
+        {% endfor %}
+      </optgroup>
+      <optgroup label="TV Genres">
+        {% for gen_id, gen_name in tv_genres.items() %}
+          <option value="{{ gen_id }}">{{ gen_name }}</option>
+        {% endfor %}
+      </optgroup>
+    </select>
+
+    <button type="submit">Browse</button>
+  </form>
+{% endblock %}

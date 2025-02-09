@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% block content %}
+  <h2>Results for "{{ query }}"</h2>
+
+  {% if results %}
+    {% for item in results %}
+      <div class="item">
+        <h3>
+          {{ item.name or item.title or "No Title" }}
+          ({{ item.release_date or item.first_air_date or "N/A" }})
+        </h3>
+
+        {% if item.poster_path %}
+          <img
+            class="poster"
+            src="{{ image_base_url }}{{ item.poster_path }}"
+            alt="Poster"
+          >
+        {% endif %}
+
+        <p>{{ item.overview }}</p>
+
+        {% if item.media_type == 'movie' %}
+          <a href="{{ url_for('recommendations', media_type='movie', item_id=item.id) }}">
+            View Similar/Recommended Movies
+          </a>
+        {% elif item.media_type == 'tv' %}
+          <a href="{{ url_for('recommendations', media_type='tv', item_id=item.id) }}">
+            View Similar/Recommended Shows
+          </a>
+        {% endif %}
+
+        {# Add to Watchlist form #}
+        <form action="{{ url_for('add_to_watchlist') }}" method="POST" style="margin-top: 8px;">
+          <input type="hidden" name="media_type" value="{{ item.media_type }}">
+          <input type="hidden" name="item_id" value="{{ item.id }}">
+          <input type="hidden" name="title" value="{{ item.title or item.name }}">
+          {% if item.poster_path %}
+            <input type="hidden" name="poster_url" value="{{ image_base_url }}{{ item.poster_path }}">
+          {% else %}
+            <input type="hidden" name="poster_url" value="">
+          {% endif %}
+          <button type="submit">Add to Watchlist</button>
+        </form>
+      </div>
+    {% endfor %}
+  {% else %}
+    <p>No results found.</p>
+  {% endif %}
+{% endblock %}

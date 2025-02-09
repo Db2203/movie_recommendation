@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block content %}
+  <h2>Search for a Movie or TV Show</h2>
+
+  <form action="{{ url_for('search') }}" method="POST">
+    <label for="query">Enter keyword:</label><br>
+    <input
+      type="text"
+      id="query"
+      name="query"
+      placeholder="e.g. Inception, Breaking Bad"
+      required
+    />
+    <button type="submit">Search</button>
+  </form>
+{% endblock %}
