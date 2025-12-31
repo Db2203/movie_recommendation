@@ -52,65 +52,101 @@ A full-stack **Flask web application** that allows users to search, browse, and 
 
 ```text
 movie_recommendation/
-├── app.py
-├── app.db
-├── requirements.txt
-├── .gitignore
+├── app.py                 # Main Flask application & routes
+├── app.db                 # SQLite database (users & watchlists)
+├── requirements.txt       # Project dependencies
+├── .gitignore             # Git ignore rules
 └── templates/
-    ├── base.html
-    ├── index.html
-    ├── login.html
-    ├── register.html
-    ├── results.html
-    ├── anime_results.html
-    └── watchlist.html
+    ├── base.html          # Base layout template
+    ├── index.html         # Home & search page
+    ├── login.html         # User login page
+    ├── register.html      # User registration page
+    ├── results.html       # Movie & TV results
+    ├── anime_results.html # Anime search results
+    └── watchlist.html     # User watchlist page
+```
 
 ---
 
 ## ⚙️ Setup & Installation
 
 ### 1️⃣ Prerequisites
-- Python 3.x
-- A TMDb API Key
+- Python **3.x**
+- A **TMDb API Key**
 
 ---
 
 ### 2️⃣ Clone the Repository
 
-git clone <your-repo-url>  
+```bash
+git clone <your-repo-url>
 cd movie_recommendation
+```
 
 ---
 
 ### 3️⃣ Install Dependencies
 
-python -m venv venv  
-source venv/bin/activate  
+It is recommended to use a virtual environment:
+
+```bash
+python -m venv venv
+source venv/bin/activate   # macOS / Linux
+venv\Scripts\activate    # Windows
 pip install -r requirements.txt
+```
 
 ---
 
 ### 4️⃣ Configuration
 
-export TMDB_API_KEY='your_api_key_here'
+Set your **TMDb API Key** as an environment variable:
 
-⚠️ Update the SECRET_KEY in app.py for production.
+**macOS / Linux**
+```bash
+export TMDB_API_KEY='your_api_key_here'
+```
+
+**Windows (Command Prompt)**
+```bash
+set TMDB_API_KEY=your_api_key_here
+```
+
+⚠️ **Note:** Update the `SECRET_KEY` in `app.py` for production environments.
 
 ---
 
 ### 5️⃣ Run the Application
 
+```bash
 python app.py
+```
 
-App runs at: http://127.0.0.1:5000/
+The app will be available at:  
+👉 **http://127.0.0.1:5000/**
 
 ---
 
 ## 🖥️ Usage
 
-- Search movies or TV shows from the home page
-- Browse or search anime
-- Register/login to save items to your watchlist
-- View recommendations using "View Similar"
+- Search for movies or TV shows from the home page
+- Browse or search anime using the Jikan API
+- Register or log in to save items to your personal watchlist
+- Click **"View Similar"** to get recommendations
+
+---
+
+## 📜 License
+
+This project is intended for **educational and personal use**.  
+All media data is provided by **TMDb** and **MyAnimeList (via Jikan API)**.
+
+---
+
+## 🙌 Acknowledgements
+
+- TMDb API for movie and TV data
+- Jikan API for anime data
+- Flask & the open-source community
 
 ---
