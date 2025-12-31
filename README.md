@@ -50,6 +50,7 @@ A full-stack **Flask web application** that allows users to search, browse, and 
 
 ## 📂 Project Structure
 
+```text
 movie_recommendation/
 ├── app.py
 ├── app.db
@@ -113,11 +114,3 @@ App runs at: http://127.0.0.1:5000/
 - View recommendations using "View Similar"
 
 ---
-
-## 📜 License
-
-This project is for educational and personal use.
-
----
-
-Happy coding 🚀
